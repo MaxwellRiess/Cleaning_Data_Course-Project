@@ -42,9 +42,12 @@ full_data$Activity[full_data$Activity == 5] <- 'STANDING'
 full_data$Activity[full_data$Activity == 6] <- 'LAYING'
 
 # Create a 'tidy_dataset' with the calculated means for each 
-# variable by activity and subject
+# variable by activity and subject and rename Subject ID and Activity Colnames.  
 tidy_dataset <- ddply(full_data, .(full_data$Subject_ID,full_data$Activity),
                        numcolwise(mean))
+colnames(tidy_dataset)[2] <- 'Activity'
+colnames(tidy_dataset)[1] <- 'Subject_ID'
+
 
 #Write 'tidy dataset' to a .txt file 
 write.table(tidy_dataset, file = 'tidy_dataset.txt', row.names = FALSE)
